@@ -8,4 +8,4 @@ What is included in this plugin?
  - [x] Class generator
  - [ ] Service generator
  - [ ] Middleware generator
- - [ ] Area generator
+ - [x] Area generator

@@ -1,0 +1,6 @@
+import { Area } from "alosaur/mod.ts";
+
+@Area({
+  controllers: [],
+})
+export class <%= className %>Area {}

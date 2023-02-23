@@ -2,11 +2,11 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
-import { AreaGeneratorSchema } from './schema';
+import { ClassGeneratorSchema } from './schema';
 
-describe('area generator', () => {
+describe('class generator', () => {
   let appTree: Tree;
-  const options: AreaGeneratorSchema = { name: 'test' };
+  const options: ClassGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace({layout: 'apps-libs'});

@@ -23,18 +23,22 @@ export type AlosaurGeneratorOptions = {
   skipFormat?: boolean;
 };
 
-
+export type AlosaurWithAreaeOption = AlosaurGeneratorOptions & {
+  area?: string;
+  skipImport?: boolean;
+};
 
 export type AlosaurWithResourceOption = AlosaurGeneratorOptions & {
   type?: TransportLayer;
 };
 
+export type AlosaurGenerator = AlosaurGeneratorOptions | AlosaurWithAreaeOption | AlosaurWithResourceOption;
+
 export type NormalizedOptions = {
   name: string;
   sourceRoot: string;
   flat?: boolean;
-  language?: 'js' | 'ts';
-  module?: string;
+  area?: string;
   path?: string;
   skipFormat?: boolean;
   skipImport?: boolean;

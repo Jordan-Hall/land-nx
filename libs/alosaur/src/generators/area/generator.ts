@@ -1,69 +1,52 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
-  offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { AreaGeneratorSchema } from './schema';
+import { NormalizedOptions, AlosaurWithAreaeOption } from '../utils/types';
+import { normalizeOptions } from '../utils/normalize-options';
+import { AppDeclarator, DeclarationOptions } from '../utils/app.declarator';
 
-interface NormalizedSchema extends AreaGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
 
-function normalizeOptions(tree: Tree, options: AreaGeneratorSchema): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
 
-  return {
+function addFiles(tree: Tree, options: NormalizedOptions) {
+  const templateOptions = {
     ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
+    ...names(options.name),
+    template: ''
   };
+  generateFiles(tree, path.join(__dirname, 'files', 'src'), options.path, templateOptions);
 }
 
-function addFiles(tree: Tree, options: NormalizedSchema) {
-    const templateOptions = {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-      template: ''
-    };
-    generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
-}
+function addDeclarationToArea(tree: Tree, options: NormalizedOptions) {
 
-export default async function (tree: Tree, options: AreaGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(
-    tree,
-    normalizedOptions.projectName,
-    {
-      root: normalizedOptions.projectRoot,
-      projectType: 'library',
-      sourceRoot: `${normalizedOptions.projectRoot}/src`,
-      targets: {
-        build: {
-          executor: "@land-nx/alosaur:build",
-        },
-      },
-      tags: normalizedOptions.parsedTags,
-    }
+  if (options.skipImport !== undefined && options.skipImport) {
+    return tree;
+  }
+
+  if (!options.area) {
+    return tree;
+  }
+  const content = tree.read(options.area).toString();
+  const declarator: AppDeclarator = new AppDeclarator();
+  tree.write(
+    options.area,
+    declarator.declare(content, { ...options, metadata: 'areas', type: 'area' } as DeclarationOptions),
   );
+  return tree;
+}
+
+function areaNormalizeOptions(tree: Tree, options: AlosaurWithAreaeOption) {
+  const normalizedOptions = normalizeOptions(tree, options);
+  normalizedOptions.area = options.area ? `${normalizedOptions.sourceRoot}/${options.area}` : `${normalizedOptions.sourceRoot}/main.ts`;
+  return normalizedOptions;
+}
+
+export default async function (tree: Tree, options: AlosaurWithAreaeOption) {
+  const normalizedOptions = areaNormalizeOptions(tree, options);
   addFiles(tree, normalizedOptions);
+  addDeclarationToArea(tree, normalizedOptions)
   await formatFiles(tree);
 }
