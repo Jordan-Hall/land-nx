@@ -1,0 +1,39 @@
+{
+  "name": "alosaur-demo-generator",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "playground/alosaur-demo-generator/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/deno:bundle",
+      "outputs": ["dist/playground/alosaur-demo-generator"],
+      "options": {
+        "main": "playground/alosaur-demo-generator/src/main.ts",
+        "outputFile": "dist/playground/alosaur-demo-generator/main.js",
+        "denoConfig": "playground/alosaur-demo-generator/deno.json"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/deno:run",
+      "options": {
+        "buildTarget": "alosaur-demo-generator:build",
+        "watch": true
+      }
+    },
+    "test": {
+      "executor": "@nrwl/deno:test",
+      "outputs": ["coverage/playground/alosaur-demo-generator"],
+      "options": {
+        "coverageDirectory": "coverage/playground/alosaur-demo-generator",
+        "denoConfig": "playground/alosaur-demo-generator/deno.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/deno:lint",
+      "options": {
+        "denoConfig": "playground/alosaur-demo-generator/deno.json"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,10 +1,7 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getImportPath,
   getWorkspaceLayout,
-  joinPathFragments,
   names,
   offsetFromRoot,
   Tree,
@@ -13,7 +10,7 @@ import {
 import * as path from 'path';
 import { ApplicationGeneratorSchema } from './schema';
 import denoBaseGenerator from '@nrwl/deno/src/generators/application/generator';
-import { ALOSAUR_VERSION } from '../ultis/version';
+import { ALOSAUR_VERSION } from '../utils/version';
 
 interface NormalizedSchema extends ApplicationGeneratorSchema {
   projectName: string;
@@ -28,7 +25,7 @@ function normalizeOptions(tree: Tree, options: ApplicationGeneratorSchema): Norm
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
+  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];

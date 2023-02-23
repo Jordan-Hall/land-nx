@@ -1,4 +1,5 @@
 {
   "imports": {
+    "alosaur/": "https://deno.land/x/alosaur@v0.38.0/"
   }
 }
