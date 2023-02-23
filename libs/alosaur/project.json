@@ -1,0 +1,67 @@
+{
+  "name": "alosaur",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/alosaur/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/alosaur",
+        "main": "libs/alosaur/src/index.ts",
+        "tsConfig": "libs/alosaur/tsconfig.lib.json",
+        "assets": [
+          "libs/alosaur/*.md",
+          {
+            "input": "./libs/alosaur/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/alosaur/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/alosaur",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/alosaur",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/alosaur/**/*.ts",
+          "libs/alosaur/generators.json",
+          "libs/alosaur/executors.json",
+          "libs/alosaur/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/alosaur/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "alosaur",
+  "version": "0.0.1",
+  "generators": {
+    "alosaur": {
+      "factory": "./src/generators/alosaur/generator",
+      "schema": "./src/generators/alosaur/schema.json",
+      "description": "alosaur generator"
+    },
+    "application": {
+      "factory": "./src/generators/application/generator",
+      "schema": "./src/generators/application/schema.json",
+      "description": "application generator"
+    },
+    "class": {
+      "factory": "./src/generators/class/generator",
+      "schema": "./src/generators/class/schema.json",
+      "description": "class generator"
+    },
+    "controller": {
+      "factory": "./src/generators/controller/generator",
+      "schema": "./src/generators/controller/schema.json",
+      "description": "controller generator"
+    },
+    "area": {
+      "factory": "./src/generators/area/generator",
+      "schema": "./src/generators/area/schema.json",
+      "description": "area generator"
+    },
+    "middleware": {
+      "factory": "./src/generators/middleware/generator",
+      "schema": "./src/generators/middleware/schema.json",
+      "description": "middleware generator"
+    }
+  }
+}
