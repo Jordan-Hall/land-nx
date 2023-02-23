@@ -4,6 +4,10 @@
   "affected": {
     "defaultBase": "master"
   },
+  "workspaceLayout": {
+    "appsDir": "playground",
+    "libsDir": "libs"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
