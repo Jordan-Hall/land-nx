@@ -44,5 +44,13 @@
     ],
     "sharedGlobals": []
   },
-  "plugins": ["@nrwl/deno"]
+  "plugins": ["@nrwl/deno"],
+  "targetDependencies": {
+    "version": [
+      {
+        "target": "version",
+        "projects": "dependencies"
+      }
+    ]
+  }
 }

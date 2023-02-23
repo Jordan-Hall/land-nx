@@ -1,8 +1,5 @@
 name: CI
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 env:
@@ -27,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
-      - run: yarn
+      - run: npm install
       - run: deno info && deno --version
       - run: npx nx affected --target=build --parallel --max-parallel=3
       - run: npx nx affected --target=test --parallel --max-parallel=2
@@ -51,7 +48,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
-      - run: yarn
+      - run: npm install
       - run: deno info && deno --version
       - run: npx nx affected --target=build --parallel --max-parallel=3
       - run: npx nx affected --target=test --parallel --max-parallel=2
@@ -72,6 +69,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
-      - run: yarn
+      - run: npm install
       - name: Start Nx Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent
