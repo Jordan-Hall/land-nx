@@ -1,3 +1,6 @@
 {
-  "eslint.validate": ["json"]
+  "eslint.validate": ["json"],
+  "deno.enablePaths": ["playground/deno-runtime", "libs/demo-lib"],
+  "deno.unstable": true,
+  "deno.importMap": "./import_map.json"
 }

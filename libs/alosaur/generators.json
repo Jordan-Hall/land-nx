@@ -3,11 +3,6 @@
   "name": "alosaur",
   "version": "0.0.1",
   "generators": {
-    "alosaur": {
-      "factory": "./src/generators/alosaur/generator",
-      "schema": "./src/generators/alosaur/schema.json",
-      "description": "alosaur generator"
-    },
     "application": {
       "factory": "./src/generators/application/generator",
       "schema": "./src/generators/application/schema.json",
@@ -32,6 +27,16 @@
       "factory": "./src/generators/middleware/generator",
       "schema": "./src/generators/middleware/schema.json",
       "description": "middleware generator"
+    },
+    "microservice": {
+      "factory": "./src/generators/microservice/generator",
+      "schema": "./src/generators/microservice/schema.json",
+      "description": "microservice generator"
+    },
+    "service": {
+      "factory": "./src/generators/service/generator",
+      "schema": "./src/generators/service/schema.json",
+      "description": "service generator"
     }
   }
 }

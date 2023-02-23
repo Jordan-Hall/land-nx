@@ -2,27 +2,22 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getImportPath,
   getWorkspaceLayout,
-  joinPathFragments,
   names,
   offsetFromRoot,
   Tree,
-  updateJson,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { ApplicationGeneratorSchema } from './schema';
-import denoBaseGenerator from '@nrwl/deno/src/generators/application/generator';
-import { ALOSAUR_VERSION } from '../ultis/version';
+import { MicroserviceGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends ApplicationGeneratorSchema {
+interface NormalizedSchema extends MicroserviceGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
 }
 
-function normalizeOptions(tree: Tree, options: ApplicationGeneratorSchema): NormalizedSchema {
+function normalizeOptions(tree: Tree, options: MicroserviceGeneratorSchema): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -52,26 +47,23 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
 }
 
-function addAlosaurToImportPath(tree: Tree) {
-  updateJson(tree, 'import_map.json', (json) => {
-    const importPath = 'alosaur/'
-    json.imports = json.imports || {};
-    if (!json.imports[importPath]) {
-      json.imports[importPath] = `https://deno.land/x/alosaur@${ALOSAUR_VERSION}/`
-    }
-    return json;
-  });
-}
-
-
-export default async function (tree: Tree, options: ApplicationGeneratorSchema) {
+export default async function (tree: Tree, options: MicroserviceGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-
-  denoBaseGenerator(tree, options);
-  tree.delete(`${normalizedOptions.projectRoot}/src/handler.ts`);
-  tree.delete(`${normalizedOptions.projectRoot}/src/handler.test.ts`);
-  tree.delete(`${normalizedOptions.projectRoot}/src/main.ts`);
+  addProjectConfiguration(
+    tree,
+    normalizedOptions.projectName,
+    {
+      root: normalizedOptions.projectRoot,
+      projectType: 'library',
+      sourceRoot: `${normalizedOptions.projectRoot}/src`,
+      targets: {
+        build: {
+          executor: "@land-nx/alosaur:build",
+        },
+      },
+      tags: normalizedOptions.parsedTags,
+    }
+  );
   addFiles(tree, normalizedOptions);
-  addAlosaurToImportPath(tree);
   await formatFiles(tree);
 }

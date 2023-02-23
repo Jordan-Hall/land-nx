@@ -43,5 +43,6 @@
       "!{projectRoot}/jest.config.[jt]s"
     ],
     "sharedGlobals": []
-  }
+  },
+  "plugins": ["@nrwl/deno"]
 }

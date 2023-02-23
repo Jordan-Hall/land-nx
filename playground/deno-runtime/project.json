@@ -1,0 +1,39 @@
+{
+  "name": "deno-runtime",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "playground/deno-runtime/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/deno:bundle",
+      "outputs": ["dist/playground/deno-runtime"],
+      "options": {
+        "main": "playground/deno-runtime/src/main.ts",
+        "outputFile": "dist/playground/deno-runtime/main.js",
+        "denoConfig": "playground/deno-runtime/deno.json"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/deno:run",
+      "options": {
+        "buildTarget": "deno-runtime:build",
+        "watch": true
+      }
+    },
+    "test": {
+      "executor": "@nrwl/deno:test",
+      "outputs": ["coverage/playground/deno-runtime"],
+      "options": {
+        "coverageDirectory": "coverage/playground/deno-runtime",
+        "denoConfig": "playground/deno-runtime/deno.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/deno:lint",
+      "options": {
+        "denoConfig": "playground/deno-runtime/deno.json"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,11 +1,11 @@
-# alosaur
+# Alosaur 🦖 Plugin for Nx
 
-This library was generated with [Nx](https://nx.dev).
+What is Alosaur 🦖?
+ - [Deno](https://github.com/denoland) web framework based on decorators.
 
-## Building
-
-Run `nx build alosaur` to build the library.
-
-## Running unit tests
-
-Run `nx test alosaur` to execute the unit tests via [Jest](https://jestjs.io).
+What is included in this plugin?
+ - [x] Application generator
+ - [x] Class generator
+ - [x] Service generator
+ - [x] Middleware generator
+ - [x] Area generator
