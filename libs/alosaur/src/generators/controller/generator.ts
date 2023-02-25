@@ -31,7 +31,10 @@ function addDeclarationToArea(tree: Tree, options: NormalizedOptions) {
   const declarator: AreaDeclarator = new AreaDeclarator();
   tree.write(
     options.area,
-    declarator.declare(content, { ...options, metadata: 'areas', type: 'controller' } as DeclarationOptions),
+    declarator.declare(
+      content,
+      { ...options, metadata: 'areas', type: 'controller', 'declarationName': '@Area' } as DeclarationOptions
+    ),
   );
   return tree;
 }

@@ -29,6 +29,7 @@ export class MetadataManager {
   public insert(
     metadata: string,
     symbol: string,
+    declarationName: DeclarationOptions['declarationName'] = '@Area',
     staticOptions?: DeclarationOptions['staticOptions'],
   ): string {
     const source: SourceFile = createSourceFile(
@@ -36,7 +37,7 @@ export class MetadataManager {
       this.content,
       ScriptTarget.ES2017,
     );
-    const decoratorNodes: Node[] = this.getDecoratorMetadata(source, '@Area');
+    const decoratorNodes: Node[] = this.getDecoratorMetadata(source, declarationName);
     const node: Node = decoratorNodes[0];
     const matchingProperties: ObjectLiteralElement[] = (
       node as ObjectLiteralExpression

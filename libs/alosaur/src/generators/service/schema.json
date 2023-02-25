@@ -15,7 +15,7 @@
       "x-prompt": "What name would you like to use?"
     },
     "area": {
-      "description": "The path to import the file you which to add as a provider",
+      "description": "The path to import the file you which to add as a provider (Area or APP)",
       "type": "string",
       "format": "path"
     },

@@ -11,6 +11,7 @@ export class AreaMetadataDeclarator {
     const inserted = manager.insert(
       options.metadata,
       options.symbol,
+      options.declarationName,
       options.staticOptions,
     );
     return inserted;

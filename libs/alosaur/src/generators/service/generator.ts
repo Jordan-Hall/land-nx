@@ -8,7 +8,7 @@ import * as path from 'path';
 import { NormalizedOptions, AlosaurWithAreaeOption } from '../utils/types';
 import { normalizeOptions } from '../utils/normalize-options';
 import { AreaDeclarator, DeclarationOptions } from '../utils/area.declarator';
-import { AppDeclarator } from '../utils/app.declarator';
+import { AppDeclarator, DeclarationOptions as AppDeclarationOptions } from '../utils/app.declarator';
 import { basename } from 'path';
 
 function addFiles(tree: Tree, options: NormalizedOptions) {
@@ -21,6 +21,7 @@ function addFiles(tree: Tree, options: NormalizedOptions) {
 }
 
 function addDeclaration(tree: Tree, options: NormalizedOptions) {
+  debugger;
   if (options.skipImport !== undefined && options.skipImport) {
     return tree;
   }
@@ -36,19 +37,19 @@ function addDeclaration(tree: Tree, options: NormalizedOptions) {
     const declarator: AreaDeclarator = new AreaDeclarator();
     tree.write(
       options.area,
-      declarator.declare(content, { ...options, metadata: 'areas', type: 'providers' } as DeclarationOptions),
-      );
-    } else if (injectIntoFileName.includes('controller.ts')) {
-    const declarator: AreaDeclarator = new AreaDeclarator();
-    tree.write(
-      options.area,
-      declarator.declare(content, { ...options, metadata: 'controller', type: 'providers' } as DeclarationOptions),
+      declarator.declare(
+        content,
+        { ...options, metadata: 'providers', type: 'service', declarationName: '@Area' } as DeclarationOptions
+      ),
     );
   } else {
     const declarator: AppDeclarator = new AppDeclarator();
     tree.write(
       options.area,
-      declarator.declare(content, { ...options, metadata: 'providers', type: 'service' } as DeclarationOptions),
+      declarator.declare(
+        content,
+        { ...options, metadata: 'providers', type: 'service' } as AppDeclarationOptions
+      ),
     );
   }
 

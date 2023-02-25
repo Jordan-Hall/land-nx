@@ -8,6 +8,7 @@ import { AreaMetadataDeclarator } from './area-metadata.declarator';
 
 export interface DeclarationOptions {
   metadata: string;
+  declarationName: string;
   type?: string;
   name: string;
   className?: string;
