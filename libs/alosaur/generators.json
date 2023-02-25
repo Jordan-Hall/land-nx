@@ -23,16 +23,6 @@
       "schema": "./src/generators/area/schema.json",
       "description": "area generator"
     },
-    "middleware": {
-      "factory": "./src/generators/middleware/generator",
-      "schema": "./src/generators/middleware/schema.json",
-      "description": "middleware generator"
-    },
-    "microservice": {
-      "factory": "./src/generators/microservice/generator",
-      "schema": "./src/generators/microservice/schema.json",
-      "description": "microservice generator"
-    },
     "service": {
       "factory": "./src/generators/service/generator",
       "schema": "./src/generators/service/schema.json",

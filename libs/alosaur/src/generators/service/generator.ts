@@ -8,6 +8,7 @@ import * as path from 'path';
 import { NormalizedOptions, AlosaurWithAreaeOption } from '../utils/types';
 import { normalizeOptions } from '../utils/normalize-options';
 import { AreaDeclarator, DeclarationOptions } from '../utils/area.declarator';
+import { AppDeclarator } from '../utils/app.declarator';
 import { basename } from 'path';
 
 function addFiles(tree: Tree, options: NormalizedOptions) {
@@ -19,8 +20,7 @@ function addFiles(tree: Tree, options: NormalizedOptions) {
   generateFiles(tree, path.join(__dirname, 'files', 'src'), options.path, templateOptions);
 }
 
-function addDeclarationToArea(tree: Tree, options: NormalizedOptions) {
-
+function addDeclaration(tree: Tree, options: NormalizedOptions) {
   if (options.skipImport !== undefined && options.skipImport) {
     return tree;
   }
@@ -29,24 +29,26 @@ function addDeclarationToArea(tree: Tree, options: NormalizedOptions) {
     return tree;
   }
   const content = tree.read(options.area).toString();
-  const declarator: AreaDeclarator = new AreaDeclarator();
 
   const injectIntoFileName = basename(options.area)
 
   if (injectIntoFileName.includes('area.ts')) {
+    const declarator: AreaDeclarator = new AreaDeclarator();
     tree.write(
       options.area,
       declarator.declare(content, { ...options, metadata: 'areas', type: 'providers' } as DeclarationOptions),
-    );
-  } else if (injectIntoFileName.includes('controller.ts')) {
+      );
+    } else if (injectIntoFileName.includes('controller.ts')) {
+    const declarator: AreaDeclarator = new AreaDeclarator();
     tree.write(
       options.area,
       declarator.declare(content, { ...options, metadata: 'controller', type: 'providers' } as DeclarationOptions),
     );
   } else {
+    const declarator: AppDeclarator = new AppDeclarator();
     tree.write(
       options.area,
-      declarator.declare(content, { ...options, metadata: 'areas', type: 'providers' } as DeclarationOptions),
+      declarator.declare(content, { ...options, metadata: 'providers', type: 'service' } as DeclarationOptions),
     );
   }
 
@@ -63,9 +65,7 @@ export default async function (tree: Tree, options: AlosaurWithAreaeOption) {
   const normalizedOptions = areaNormalizeOptions(tree, options);
   addFiles(tree, normalizedOptions);
 
-  if (normalizedOptions.area) {
-    addDeclarationToArea(tree, normalizedOptions)
-  }
+  addDeclaration(tree, normalizedOptions)
 
   if (options.skipFormat !== undefined && !options.skipFormat) {
     await formatFiles(tree);

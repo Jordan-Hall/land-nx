@@ -2,7 +2,6 @@ import { basename, dirname, relative, normalize } from 'path';
 
 export class PathSolver {
   public relative(from: string, to: string): string {
-    debugger;
     const relativeDir = relative(
       dirname(normalize(from)),
       dirname(normalize(to)),

@@ -1,4 +1,4 @@
 import { Injectable } from 'alosaur/mod.ts';
 
 @Injectable()
-export class <%= className %> {}
+export class <%= className %>Service {}
