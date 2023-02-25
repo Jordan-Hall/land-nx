@@ -16,6 +16,10 @@
     "affected:lint": "nx affected:lint",
     "prepare": "husky install"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jordan-Hall/land-nx"
+  },
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
