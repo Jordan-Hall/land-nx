@@ -2,6 +2,14 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.2.0](https://github.com/Jordan-Hall/land-nx/compare/alosaur-0.1.0...alosaur-0.2.0) (2023-02-25)
+
+* **alosaur:** add area generator ([c880141](https://github.com/Jordan-Hall/land-nx/commit/c880141dee9e4a02ad041ac78af501a17dd47075))
+
+### Features
+
+* **alosaur:** add area generator ([c880141](https://github.com/Jordan-Hall/land-nx/commit/c880141dee9e4a02ad041ac78af501a17dd47075))
+
 ## [0.2.0](https://github.com/Jordan-Hall/land-nx/compare/alosaur-0.1.0...alosaur-0.2.0) (2023-02-23)
 
 
