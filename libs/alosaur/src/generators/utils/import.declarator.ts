@@ -4,7 +4,7 @@
 */
 
 import { normalize } from 'path';
-import { DeclarationOptions } from './area.declarator';
+import { DeclarationOptions } from './app.declarator';
 import { PathSolver } from './path.solver';
 
 export class ImportDeclarator {
