@@ -22,5 +22,7 @@ function addFiles(tree: Tree, options: NormalizedOptions) {
 export default async function (tree: Tree, options: AlosaurGeneratorOptions) {
   const normalizedOptions = normalizeOptions(tree, options);
   addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
+  if (options.skipFormat !== true) {
+    await formatFiles(tree);
+  }
 }
