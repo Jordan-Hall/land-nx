@@ -6,6 +6,10 @@ What is Alosaur 🦖?
 What is included in this plugin?
  - [x] Application generator
  - [x] Class generator
+ - [x] Controller generator
+ - [x] Area generator
+
+What's coming next?
  - [ ] Service generator
  - [ ] Middleware generator
- - [x] Area generator
+ - [ ] Microservices generator

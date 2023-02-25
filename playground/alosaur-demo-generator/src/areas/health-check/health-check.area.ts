@@ -3,5 +3,4 @@ import { HealthCheckController } from './health-check.controller.ts';
 
 @Area({
   controllers: [HealthCheckController],
-})
 export class HealthCheckArea {}
